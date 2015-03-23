@@ -1,4 +1,5 @@
-﻿using System;
+//FROM http://stackoverflow.com/a/2791259
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
