@@ -25,6 +25,8 @@ namespace KeepAlive
         string sharedSecret = "_this_is_secret_PILIF_STUDIO_";
         string connString = "";
 
+        Boolean WriteLog = true;
+
         List<string> urls = new List<string>();
         object lockObj = new object();
 
@@ -62,6 +64,9 @@ namespace KeepAlive
                 {
                     connString = Crypto.Crypto.DecryptStringAES(mySR.ReadToEnd(), sharedSecret);
                 }
+
+                FillParams();
+
                 Log("Start program");
                 updateListTimer = new System.Timers.Timer();
                 updateListTimer.Interval = Minute.MinutesToMiliseconds(30);
@@ -75,6 +80,8 @@ namespace KeepAlive
                 keepAliveTimer.Enabled = true;
                 keepAliveTimer.Start();
 
+
+
                 UpdateList();
                 PingList();
             }
@@ -84,8 +91,33 @@ namespace KeepAlive
             }
         }
 
+        private void FillParams()
+        {
+            using (var conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                using (var cmd = new SqlCommand("SELECT * FROM Settings"))
+                using (SqlDataReader myR = cmd.ExecuteReader())
+                {
+                    while (myR.Read())
+                    {
+                        switch (myR["Field"].ToString())
+                        {
+                            case "Log":
+                                WriteLog = myR["Value"].ToString() == "Y";
+                                break;
+                        }
+
+                    }
+                }
+            }
+        }
+
         void Log(string text)
         {
+            if (!WriteLog)
+                return;
+
             using (var conn = new SqlConnection(connString))
             {
                 conn.Open();

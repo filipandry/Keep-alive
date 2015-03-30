@@ -33,12 +33,37 @@ namespace KeepAliveConfigurator
                 {
                     connString = Crypto.Crypto.DecryptStringAES(mySR.ReadToEnd(), sharedSecret);
                     FillGrid();
+                    FillForm();
                 }
             }
             else
             {
                 toolStrip1.Enabled = false;
                 MessageBox.Show("Please setup the database first");
+            }
+        }
+
+        private void FillForm()
+        {
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM settings",conn))
+                {
+                    using (SqlDataReader myR = cmd.ExecuteReader())
+                    {
+                        while (myR.Read())
+                        {
+                            switch (myR["Field"].ToString())
+                            {
+                                case "Logs":
+                                    chkLog.Checked = myR["Value"].ToString() == "Y";
+                                    break;
+                            }
+
+                        }
+                    }
+                }
             }
         }
 
@@ -63,14 +88,16 @@ namespace KeepAliveConfigurator
                 {
                     using (SqlCommand cmd = new SqlCommand("INSERT INTO links (Url) VALUES ('" + txtUrl.Text.Replace("'", "''") + "')", conn))
                     {
-                        int result = cmd.ExecuteNonQuery(); FillGrid();
+                        int result = cmd.ExecuteNonQuery(); 
+                        FillGrid();
                     }
                 }
                 else
                 {
                     using (SqlCommand cmd = new SqlCommand("UPDATE links SET Url = '" + txtUrl.Text.Replace("'", "''") + "' WHERE id = " + CurrID, conn))
                     {
-                        int result = cmd.ExecuteNonQuery(); FillGrid();
+                        int result = cmd.ExecuteNonQuery(); 
+                        FillGrid();
                     }
                 }
                 New();
@@ -205,6 +232,34 @@ namespace KeepAliveConfigurator
         private void grdUrls_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             OpenRow();
+        }
+
+        private void chkLog_CheckedChanged(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("UPDATE settings SET Value = @value WHERE Field = @field",conn))
+                {
+                    cmd.Parameters.AddWithValue("@value", chkLog.Checked ? "Y" : "N");
+                    cmd.Parameters.AddWithValue("@field", "Logs");
+
+                    int result = cmd.ExecuteNonQuery();
+                    FillGrid();
+                }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("DELETE FROM logs",conn))
+                {
+                    int result = cmd.ExecuteNonQuery();
+                }
+            }
         }
 
     }

@@ -60,6 +60,13 @@ namespace KeepAliveDbSetup
 
                         cmd.CommandText = "CREATE TABLE logs (id INT IDENTITY NOT NULL,Data DATETIME NOT NULL,Log TEXT NOT NULL,PRIMARY KEY(id))";
                         result = cmd.ExecuteNonQuery();
+
+                        cmd.CommandText = "CREATE TABLE settings (id INT IDENTITY NOT NULL,Field VARCHAR(50) NULL,Value NVARCHAR(255) NULL,PRIMARY KEY(id))";
+                        result = cmd.ExecuteNonQuery();
+
+                        //insert default params
+                        cmd.CommandText = "INSERT INTO settings (Field,Value) VALUES ('Logs','Y')";
+                        result = cmd.ExecuteNonQuery();
                     }
                 }
                 catch (InvalidOperationException ex) { MessageBox.Show(ex.Message); noError = false; }

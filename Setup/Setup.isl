@@ -3871,7 +3871,7 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
-		<row><td>NewShortcut1_3203FC91DDDA49758501AEF6E58C7FC4.exe</td><td/><td>C:\Users\Administrator\Downloads\system_config_services.ico</td><td>0</td></row>
+		<row><td>NewShortcut1_B590F907B02F4738973CD798B0A07003.exe</td><td/><td>&lt;VSSolutionFolder&gt;\system_config_services.ico</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
@@ -4544,7 +4544,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>NewShortcut1</td><td>DesktopFolder</td><td>##ID_STRING5##</td><td>KeepAliveConfigurator.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td>NewShortcut1_3203FC91DDDA49758501AEF6E58C7FC4.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>NewShortcut1</td><td>DesktopFolder</td><td>##ID_STRING5##</td><td>KeepAliveConfigurator.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td>NewShortcut1_B590F907B02F4738973CD798B0A07003.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">

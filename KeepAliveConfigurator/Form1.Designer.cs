@@ -42,11 +42,19 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtUrl = new System.Windows.Forms.TextBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.chkLog = new System.Windows.Forms.CheckBox();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdUrls)).BeginInit();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.RightToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdUrls
@@ -58,7 +66,7 @@
             this.grdUrls.Location = new System.Drawing.Point(0, 0);
             this.grdUrls.Name = "grdUrls";
             this.grdUrls.ReadOnly = true;
-            this.grdUrls.Size = new System.Drawing.Size(579, 252);
+            this.grdUrls.Size = new System.Drawing.Size(634, 285);
             this.grdUrls.TabIndex = 0;
             this.grdUrls.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdUrls_CellDoubleClick);
             // 
@@ -71,14 +79,14 @@
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.grdUrls);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(579, 252);
-            this.toolStripContainer1.Location = new System.Drawing.Point(2, 51);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(634, 285);
+            this.toolStripContainer1.Location = new System.Drawing.Point(0, 45);
             this.toolStripContainer1.Name = "toolStripContainer1";
             // 
             // toolStripContainer1.RightToolStripPanel
             // 
             this.toolStripContainer1.RightToolStripPanel.Controls.Add(this.toolStrip1);
-            this.toolStripContainer1.Size = new System.Drawing.Size(654, 277);
+            this.toolStripContainer1.Size = new System.Drawing.Size(709, 310);
             this.toolStripContainer1.TabIndex = 1;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -157,7 +165,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(568, 334);
+            this.button1.Location = new System.Drawing.Point(627, 390);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -168,7 +176,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(10, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 3;
@@ -176,20 +184,79 @@
             // 
             // txtUrl
             // 
-            this.txtUrl.Location = new System.Drawing.Point(15, 25);
+            this.txtUrl.Location = new System.Drawing.Point(13, 19);
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.Size = new System.Drawing.Size(222, 20);
             this.txtUrl.TabIndex = 4;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(-2, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(717, 384);
+            this.tabControl1.TabIndex = 5;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.toolStripContainer1);
+            this.tabPage1.Controls.Add(this.txtUrl);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(709, 358);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "URLs setup";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.chkLog);
+            this.tabPage2.Controls.Add(this.button3);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(709, 358);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Settings";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // chkLog
+            // 
+            this.chkLog.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkLog.Location = new System.Drawing.Point(23, 18);
+            this.chkLog.Name = "chkLog";
+            this.chkLog.Size = new System.Drawing.Size(75, 24);
+            this.chkLog.TabIndex = 2;
+            this.chkLog.Text = "Use log";
+            this.chkLog.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkLog.UseVisualStyleBackColor = true;
+            this.chkLog.CheckedChanged += new System.EventHandler(this.chkLog_CheckedChanged);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(23, 59);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "Clear log";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(655, 367);
-            this.Controls.Add(this.txtUrl);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(714, 423);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.toolStripContainer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Keep alive | Configurator";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -201,8 +268,11 @@
             this.toolStripContainer1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -221,6 +291,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton btnTBNew;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.CheckBox chkLog;
     }
 }
 
