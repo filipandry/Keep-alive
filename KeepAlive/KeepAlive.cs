@@ -96,14 +96,14 @@ namespace KeepAlive
             using (var conn = new SqlConnection(connString))
             {
                 conn.Open();
-                using (var cmd = new SqlCommand("SELECT * FROM Settings"))
+                using (var cmd = new SqlCommand("SELECT * FROM Settings",conn))
                 using (SqlDataReader myR = cmd.ExecuteReader())
                 {
                     while (myR.Read())
                     {
                         switch (myR["Field"].ToString())
                         {
-                            case "Log":
+                            case "Logs":
                                 WriteLog = myR["Value"].ToString() == "Y";
                                 break;
                         }
@@ -186,6 +186,7 @@ namespace KeepAlive
 
         void keepAliveTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
+            FillParams();
             PingList();
         }
 
@@ -194,7 +195,8 @@ namespace KeepAlive
             lock (lockObj)
             {
                 Log("Start Ping");
-                foreach (string url in urls)
+
+                urls.ForEach(url =>
                 {
                     try
                     {
@@ -210,13 +212,37 @@ namespace KeepAlive
                         {
                             using (request.GetResponse() as HttpWebResponse) { }
                         }
-                        Log("Ping successfully");
+                        Log("Ping successfully: " + url);
                     }
                     catch
                     {
                         Log("Could not ping " + url);
                     }
-                }
+                });
+
+                //foreach (string url in urls)
+                //{
+                //    try
+                //    {
+                //        if (!url.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                //        {
+                //            Log("Url " + url + " doesn't start with http");
+                //            return;
+                //        }
+
+                //        Log("Start ping " + url);
+                //        var request = WebRequest.Create(url) as HttpWebRequest;
+                //        if (request != null)
+                //        {
+                //            using (request.GetResponse() as HttpWebResponse) { }
+                //        }
+                //        Log("Ping successfully");
+                //    }
+                //    catch
+                //    {
+                //        Log("Could not ping " + url);
+                //    }
+                //}
                 Log("End ping");
             }
         }

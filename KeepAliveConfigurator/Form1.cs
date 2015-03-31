@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
@@ -14,9 +15,12 @@ namespace KeepAliveConfigurator
 {
     public partial class Form1 : Form
     {
+        private delegate void InvokeDelegate();
         string confFile = Path.Combine(Application.StartupPath, "conf.ini");
         string sharedSecret = "_this_is_secret_PILIF_STUDIO_";
         string connString = "";
+
+        System.Timers.Timer LogTimer;
 
         int CurrID = 0;
 
@@ -32,15 +36,30 @@ namespace KeepAliveConfigurator
                 using (StreamReader mySR = new StreamReader(confFile))
                 {
                     connString = Crypto.Crypto.DecryptStringAES(mySR.ReadToEnd(), sharedSecret);
-                    FillGrid();
-                    FillForm();
                 }
+
+                LogTimer = new System.Timers.Timer();
+
+                LogTimer.Interval = 1000 * 30;
+                LogTimer.Elapsed += LogTimer_Elapsed;
+                LogTimer.Enabled = true;
+                LogTimer.Start();
+
+
+                FillGrid();
+                FillGridLogs();
+                FillForm();
             }
             else
             {
                 toolStrip1.Enabled = false;
                 MessageBox.Show("Please setup the database first");
             }
+        }
+
+        void LogTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            FillGridLogs();
         }
 
         private void FillForm()
@@ -167,6 +186,30 @@ namespace KeepAliveConfigurator
                     grdUrls.Columns[1].Visible = true;
                     grdUrls.Columns[1].ReadOnly = false;
                     grdUrls.Columns[1].Width = 500;
+                }
+            }
+        }
+
+        void FillGridLogs()
+        {
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM logs ORDER BY ID DESC", conn))
+                {
+                    DataTable myDT = ExecuteDataTable(cmd);
+
+                    grdUrls.BeginInvoke(new InvokeDelegate(() =>
+                    {
+                        grdLogs.DataSource = myDT;
+                    }));
+
+                    //grdUrls.Columns[0].Visible = false;
+                    //grdUrls.Columns[1].Visible = true;
+                    //grdUrls.Columns[1].ReadOnly = false;
+                    //grdUrls.Columns[1].Width = 500;
                 }
             }
         }

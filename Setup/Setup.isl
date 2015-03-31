@@ -2656,7 +2656,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>Pilif Studio</td><td>0</td><td/><td>-1851556279</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>Pilif Studio</td><td>0</td><td/><td>-106722262</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-1851530104</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-1851530104</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40CLIENT</td><td>1033</td><td>Microsoft .NET Framework 4.0 Client Package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-1851577144</td></row>
@@ -2665,6 +2665,7 @@
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-1851530104</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-1851530104</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_SCREEN</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-1851530104</td></row>
+		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_SQLEXP2008SP1FOUND</td><td>1033</td><td>SQL Server 2008 Express SP1 needs to be installed for this installation to continue.</td><td>0</td><td/><td>-106709974</td></row>
 		<row><td>IDPROP_SETUPTYPE_COMPACT</td><td>1033</td><td>Compact</td><td>0</td><td/><td>-1851530104</td></row>
 		<row><td>IDPROP_SETUPTYPE_COMPACT_DESC</td><td>1033</td><td>Compact Description</td><td>0</td><td/><td>-1851530104</td></row>
 		<row><td>IDPROP_SETUPTYPE_COMPLETE</td><td>1033</td><td>Complete</td><td>0</td><td/><td>-1851530104</td></row>
@@ -3758,8 +3759,8 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-1851530104</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-1851530104</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-1851530104</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://www.PilifStudio.com</td><td>0</td><td/><td>-1851556279</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>Pilif Studio</td><td>0</td><td/><td>-1851556279</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>http://www.PilifStudio.com</td><td>0</td><td/><td>-106722262</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>Pilif Studio</td><td>0</td><td/><td>-106722262</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>Keep alive service</td><td>0</td><td/><td>-1851574071</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>Keep alive an ASP.NET application</td><td>0</td><td/><td>-1851557687</td></row>
 		<row><td>ID_STRING5</td><td>1033</td><td>KEEPAL~1|KeepAlive configurator</td><td>0</td><td/><td>-1851565392</td></row>
@@ -4521,7 +4522,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">Arguments</col>
 		<col def="s72">Component_</col>
 		<col def="L255">Description</col>
-		<row><td>NewServiceInstall1</td><td>KeepAlive</td><td>##ID_STRING3##</td><td>16</td><td>2</td><td>1</td><td/><td/><td/><td/><td/><td>KeepAlive.Primary_output</td><td>##ID_STRING4##</td></row>
+		<row><td>NewServiceInstall1</td><td>KeepAlive</td><td>##ID_STRING3##</td><td>16</td><td>2</td><td>1</td><td/><td>MSSQL$SQLEXPRESS[~][~]</td><td/><td/><td/><td>KeepAlive.Primary_output</td><td>##ID_STRING4##</td></row>
 	</table>
 
 	<table name="Shortcut">
