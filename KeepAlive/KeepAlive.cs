@@ -18,7 +18,6 @@ namespace KeepAlive
     {
         System.Timers.Timer myTimer;
         System.Timers.Timer keepAliveTimer;
-        System.Timers.Timer updateListTimer;
 
         string confFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "conf.ini");
         string logFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log.txt");
@@ -67,12 +66,7 @@ namespace KeepAlive
 
                 FillParams();
 
-                Log("Start program");
-                updateListTimer = new System.Timers.Timer();
-                updateListTimer.Interval = Minute.MinutesToMiliseconds(30);
-                updateListTimer.Elapsed += updateListTimer_Elapsed;
-                updateListTimer.Enabled = true;
-                updateListTimer.Start();
+                Log("Start program", true);
 
                 keepAliveTimer = new System.Timers.Timer();
                 keepAliveTimer.Interval = Minute.MinutesToMiliseconds(1);
@@ -101,6 +95,7 @@ namespace KeepAlive
                 {
                     while (myR.Read())
                     {
+                        Log("Load param " + myR["Field"].ToString() + " = " + myR["Value"].ToString(), true);
                         switch (myR["Field"].ToString())
                         {
                             case "Logs":
@@ -115,7 +110,12 @@ namespace KeepAlive
 
         void Log(string text)
         {
-            if (!WriteLog)
+            Log(text, WriteLog);
+        }
+
+        void Log(string text, Boolean writeLog)
+        {
+            if (!writeLog)
                 return;
 
             using (var conn = new SqlConnection(connString))
@@ -148,16 +148,11 @@ namespace KeepAlive
             }
         }
 
-        void updateListTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            UpdateList();
-        }
-
         void UpdateList()
         {
             lock (lockObj)
             {
-                Log("Update links' list");
+                Log("Update links' list",true);
                 urls.Clear();
                 using (var conn = new SqlConnection(connString))
                 {
@@ -180,13 +175,14 @@ namespace KeepAlive
                         Log(ex.Message);
                     }
                 }
-                Log("End update list");
+                Log("End update list",true);
             }
         }
 
         void keepAliveTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             FillParams();
+            UpdateList();
             PingList();
         }
 
@@ -194,7 +190,7 @@ namespace KeepAlive
         {
             lock (lockObj)
             {
-                Log("Start Ping");
+                Log("Start Ping",true);
 
                 urls.ForEach(url =>
                 {
@@ -219,61 +215,42 @@ namespace KeepAlive
                         Log("Could not ping " + url);
                     }
                 });
-
-                //foreach (string url in urls)
-                //{
-                //    try
-                //    {
-                //        if (!url.StartsWith("http", StringComparison.OrdinalIgnoreCase))
-                //        {
-                //            Log("Url " + url + " doesn't start with http");
-                //            return;
-                //        }
-
-                //        Log("Start ping " + url);
-                //        var request = WebRequest.Create(url) as HttpWebRequest;
-                //        if (request != null)
-                //        {
-                //            using (request.GetResponse() as HttpWebResponse) { }
-                //        }
-                //        Log("Ping successfully");
-                //    }
-                //    catch
-                //    {
-                //        Log("Could not ping " + url);
-                //    }
-                //}
-                Log("End ping");
+                Log("End ping",true);
             }
         }
 
         protected override void OnStop()
         {
+            Log("The service was stopped", true);
             myTimer.Stop();
             if (keepAliveTimer != null)
             {
-                updateListTimer.Stop();
                 keepAliveTimer.Stop();
             }
+            else
+                myTimer.Stop();
         }
 
         protected override void OnPause()
         {
+            Log("The service was paused", true);
             base.OnPause();
 
-            myTimer.Stop(); if (keepAliveTimer != null)
+            myTimer.Stop();
+            if (keepAliveTimer != null)
             {
-                updateListTimer.Stop();
                 keepAliveTimer.Stop();
             }
+            else
+                myTimer.Stop();
         }
 
         protected override void OnContinue()
         {
+            Log("The service was resumed", true);
             base.OnContinue();
             if (keepAliveTimer != null)
             {
-                updateListTimer.Start();
                 keepAliveTimer.Start();
             }
             else
